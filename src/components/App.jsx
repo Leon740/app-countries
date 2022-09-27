@@ -48,7 +48,7 @@ function App() {
 
   return (
     <main className="bg-slate-50">
-      <header className="bg-white shadow-lg shadow-slate-150 sticky top-0 z-20">
+      <header className="bg-white shadow-md shadow-slate-200 sticky top-0 z-20">
         <Container as="section" className="pt-4 pb-4 flex items-center justify-between">
           <h1 className="text-lg font-bold">Countries App</h1>
           <button type="button" className="flex items-center text-sm hover:underline">
@@ -75,7 +75,7 @@ function App() {
                 <input
                   id="search"
                   placeholder="Search for country"
-                  className="text-base pr-6 pl-16 pt-4 pb-4 w-full outline-0 bg-white rounded-lg transition ease-in-out duration-300 shadow-slate-150 shadow-lg focus:shadow-xl"
+                  className="text-base pr-6 pl-16 pt-4 pb-4 w-full outline-0 bg-white rounded-lg transition ease-in-out duration-300 shadow-md shadow-slate-200 focus:shadow-lg"
                   value={stSearchQuery}
                   onChange={(event) => setStSearchQuery(event.target.value)}
                 />

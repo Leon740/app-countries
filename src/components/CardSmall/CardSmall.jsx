@@ -11,7 +11,7 @@ function CardSmall({ country }) {
 
   return (
     <li className="p-8 grow-0 w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5">
-      <div className="rounded-lg overflow-hidden shadow-lg shadow-slate-150 bg-white h-full">
+      <div className="rounded-lg overflow-hidden shadow-md shadow-slate-200 bg-white h-full">
         <img src={flagUrl} alt={nameOfficial} className="w-full h-32 object-cover" />
         <section className="p-8">
           <h2 className="text-lg font-bold mb-4 whitespace-nowrap overflow-hidden text-ellipsis w-full">{nameCommon}</h2>
