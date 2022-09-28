@@ -1,41 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-// Components
-import FeaturesItem from './FeaturesItem';
+import { BsArrowRightShort } from 'react-icons/bs';
+import Feature from './Feature';
 
 function CardSmall({ country }) {
   const {
-    name: { common: nameCommon, official: nameOfficial }, flags: { svg: flagUrl }, region, continents, timezones, population,
+    name: { common: nameCommon, official: nameOfficial }, flags: { svg: flagUrl }, region, continents, population,
   } = country;
 
   return (
-    <li className="p-8 grow-0 w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5">
-      <div className="rounded-lg overflow-hidden shadow-md shadow-slate-200 bg-white h-full">
+    <li className="p-8 grow-0 w-full sm:w-6/12 lg:w-4/12 xl:w-3/12 2xl:w-1/5">
+      <div className="h-full rounded-lg overflow-hidden shadow-md shadow-slate-200 dark:shadow-gray-800 bg-white dark:bg-customgray-200">
         <img src={flagUrl} alt={nameOfficial} className="w-full h-32 object-cover" />
         <section className="p-8">
-          <h2 className="text-lg font-bold mb-4 whitespace-nowrap overflow-hidden text-ellipsis w-full">{nameCommon}</h2>
-          <ul>
-            <FeaturesItem feature="Region">
-              {region}
-            </FeaturesItem>
-            <FeaturesItem feature="Continent">
-              {continents}
-            </FeaturesItem>
-            <FeaturesItem feature={`Timezone${timezones.slice(0, 3).length > 1 ? 's' : ''}`}>
-              <ul className="flex flex-col">
-                {timezones && timezones.slice(0, 3).map((timezone, index) => (
-                  <li key={timezone}>
-                    {timezone}
-                    {index === timezones.slice(0, 3).length - 1 ? '' : ','}
-                  </li>
-                ))}
-              </ul>
-            </FeaturesItem>
-            <FeaturesItem feature="Population">
-              {population}
-            </FeaturesItem>
+          <h2 className="text-lg font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full">{nameCommon}</h2>
+          <ul className="mt-6 mb-6">
+            <Feature name="Region">{region}</Feature>
+            <Feature name="Continent">{continents}</Feature>
+            <Feature name="Population">{population.toLocaleString()}</Feature>
           </ul>
+
+          <a href="/test" className="text-base flex items-center hover:underline">
+            <span>View country</span>
+            <BsArrowRightShort className="text-2xl" />
+          </a>
         </section>
       </div>
     </li>
@@ -53,7 +41,6 @@ CardSmall.propTypes = {
     }),
     region: PropTypes.string,
     continents: PropTypes.arrayOf(PropTypes.string),
-    timezones: PropTypes.arrayOf(PropTypes.string),
     population: PropTypes.number,
   }),
 };
@@ -69,7 +56,6 @@ CardSmall.defaultProps = {
     },
     region: 'region',
     continents: ['continents'],
-    timezones: ['timezones'],
     population: 0,
   },
 };
