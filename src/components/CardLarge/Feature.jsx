@@ -3,15 +3,12 @@ import PropTypes from 'prop-types';
 
 function Feature({ name, children }) {
   return (
-    <li className="mb-2 text-sm">
-      <span className="font-semibold">
+    <li className="text-base mb-4">
+      <div className="font-semibold mb-2">
         {name}
         :
-      </span>
-      {' '}
-      <span>
-        {children}
-      </span>
+      </div>
+      <div>{children}</div>
     </li>
   );
 }

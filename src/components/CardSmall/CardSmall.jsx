@@ -20,10 +20,10 @@ function CardSmall({ country }) {
             <Feature name="Population">{population.toLocaleString()}</Feature>
           </ul>
 
-          <a href="/test" className="text-base flex items-center hover:underline">
-            <span>View country</span>
+          <button type="button" className="flex items-center pt-2 pb-2 pl-4 pr-2 rounded-lg bg-white dark:bg-customgray-200 shadow-md shadow-slate-200 dark:shadow-gray-800 hover:shadow-inner hover:shadow-slate-300 dark:hover:shadow-gray-900">
+            <span className="text-base mr-2">View</span>
             <BsArrowRightShort className="text-2xl" />
-          </a>
+          </button>
         </section>
       </div>
     </li>
@@ -48,8 +48,8 @@ CardSmall.propTypes = {
 CardSmall.defaultProps = {
   country: {
     name: {
-      common: 'Common name',
-      official: 'Official name',
+      common: 'common name',
+      official: 'official name',
     },
     flags: {
       svg: '',

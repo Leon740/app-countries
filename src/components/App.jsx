@@ -7,6 +7,7 @@ import DisplayError from './DisplayError';
 import Container from './common/Container';
 import SearchControls from './SearchControls';
 import CardSmall from './CardSmall/CardSmall';
+import CardLarge from './CardLarge/CardLarge';
 
 function App() {
   const API_BASE_URL = 'https://restcountries.com/v3.1/';
@@ -51,7 +52,7 @@ function App() {
   }
 
   return (
-    <main className="text-black dark:text-white">
+    <main>
       <Header />
 
       <Container>
@@ -65,7 +66,10 @@ function App() {
           fnSearchInputOnChange().length > 0 ? (
             <ul className="flex flex-wrap mt-8 -ml-8 -mr-8 mb-8">
               {fnSearchInputOnChange().map((country) => (
-                <CardSmall key={country.name.common} country={country} />
+                <>
+                  <CardLarge key={country.name.common} country={country} />
+                  <CardSmall key={country.name.common} country={country} />
+                </>
               ))}
             </ul>
           ) : (
