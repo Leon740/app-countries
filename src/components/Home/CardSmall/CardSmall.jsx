@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { BsArrowRightShort } from 'react-icons/bs';
 import Feature from './Feature';
 
 function CardSmall({ country }) {
   const {
-    name: { common: nameCommon, official: nameOfficial }, flags: { svg: flagUrl }, region, continents, population,
+    name: { common: nameCommon, official: nameOfficial }, cca2: code, flags: { svg: flagUrl }, region, continents, population,
   } = country;
 
   return (
@@ -20,10 +21,10 @@ function CardSmall({ country }) {
             <Feature name="Population">{population.toLocaleString()}</Feature>
           </ul>
 
-          <button type="button" className="flex items-center pt-2 pb-2 pl-4 pr-2 rounded-lg bg-white dark:bg-customgray-200 shadow-md shadow-slate-200 dark:shadow-gray-800 hover:shadow-inner hover:shadow-slate-300 dark:hover:shadow-gray-900">
+          <Link to={`/country/${code}`} state={country} className="max-w-max flex items-center pt-2 pb-2 pl-4 pr-2 rounded-lg bg-white dark:bg-customgray-200 shadow-md shadow-slate-200 dark:shadow-gray-800 hover:shadow-inner hover:shadow-slate-300 dark:hover:shadow-gray-900">
             <span className="text-base mr-2">View</span>
             <BsArrowRightShort className="text-2xl" />
-          </button>
+          </Link>
         </section>
       </div>
     </li>
@@ -36,6 +37,7 @@ CardSmall.propTypes = {
       common: PropTypes.string,
       official: PropTypes.string,
     }),
+    cca2: PropTypes.string,
     flags: PropTypes.shape({
       svg: PropTypes.string,
     }),
@@ -51,6 +53,7 @@ CardSmall.defaultProps = {
       common: 'common name',
       official: 'official name',
     },
+    cca2: '',
     flags: {
       svg: '',
     },
