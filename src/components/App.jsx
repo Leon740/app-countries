@@ -2,80 +2,56 @@
 import React, { useEffect, useState } from 'react';
 import fnSanitizeString from '../utils/fnSanitizeString';
 import Header from './Header';
-import Loader from './Loader';
 import DisplayError from './DisplayError';
 import Container from './common/Container';
 import SearchControls from './SearchControls';
-// import CardSmall from './CardSmall/CardSmall';
-import CardLarge from './CardLarge/CardLarge';
+import CardSmall from './CardSmall/CardSmall';
+// import CardLarge from './CardLarge/CardLarge';
+import ALL_COUNTRIES from '../data.json';
 
 function App() {
-  const API_BASE_URL = 'https://restcountries.com/v3.1/';
-  const [stApiUrl, setStApiUrl] = useState(`${API_BASE_URL}all`);
-  const [stCountries, setStCountries] = useState(null);
-  const [stStatus, setStStatus] = useState({ status: 'pending', message: '' });
+  const [stCountries, setStCountries] = useState(ALL_COUNTRIES);
 
-  // Fetch data
+  function fnSearch(type) {
+    // eslint-disable-next-line func-names
+    return function (value) {
+      let result;
+      switch (type) {
+        case 'name': result = stCountries.filter((country) => fnSanitizeString(country.name.common).includes(fnSanitizeString(value)));
+          break;
+        case 'region': result = stCountries.filter((country) => fnSanitizeString(country.region).includes(fnSanitizeString(value)));
+          break;
+        default:
+      }
+      console.log(result);
+      setStCountries(result || ALL_COUNTRIES);
+    };
+  }
+
   useEffect(() => {
-    setStStatus({ status: 'pending', message: '' });
-    fetch(stApiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          setStStatus({ status: 'rejected', message: response.status });
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.length) {
-          setStCountries(data);
-          setStStatus({ status: 'fulfilled', message: '' });
-        }
-      });
-  }, [stApiUrl]);
+    console.clear();
+    stCountries.map((country) => console.log(country.name.common));
+  }, [stCountries]);
 
-  // Search
-  const [stSearchQuery, setStSearchQuery] = useState('');
-
-  function fnSearchInputOnChange() {
-    if (stSearchQuery.length > 1) {
-      const result = stCountries.filter((country) => fnSanitizeString(country.name.common).includes(fnSanitizeString(stSearchQuery)));
-      return result;
-    }
-
-    return stCountries;
-  }
-
-  // Select
-  function fnRegionOnChange(region) {
-    setStSearchQuery('');
-    setStApiUrl(`${API_BASE_URL}${region === 'all' ? 'all' : `region/${region}`}`);
-  }
+  const fnSearchByName = fnSearch('name');
+  const fnSearchByRegion = fnSearch('region');
 
   return (
     <main>
       <Header />
 
       <Container>
-        <SearchControls inputValue={stSearchQuery} inputOnChange={setStSearchQuery} selectOnChange={fnRegionOnChange} />
+        <SearchControls fnInputOnChange={fnSearchByName} fnSelectOnChange={fnSearchByRegion} />
 
-        {stStatus.status === 'pending' && <Loader />}
-
-        {stStatus.status === 'rejected' && <DisplayError message={`${stStatus.message} Error`} />}
-
-        {stStatus.status === 'fulfilled' && (
-          fnSearchInputOnChange().length > 0 ? (
-            <ul className="flex flex-wrap mt-8 -ml-8 -mr-8 mb-8">
-              {fnSearchInputOnChange().map((country) => (
-                <>
-                  <CardLarge key={country.name.common} country={country} />
-                  {/* <CardSmall key={country.name.common} country={country} /> */}
-                </>
-              ))}
+        {stCountries.length > 0
+          ? (
+            <ul className="flex flex-wrap -mt-8 -ml-8 -mr-8 mb-8">
+              {stCountries.map((country) => <CardSmall key={country.name.common} country={country} />)}
             </ul>
-          ) : (
-            <DisplayError message="Not Found" />
           )
-        )}
+          : (
+            <DisplayError message="Country not found." />
+          )}
       </Container>
     </main>
   );

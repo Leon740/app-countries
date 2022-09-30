@@ -10,7 +10,7 @@ function DisplayError({ message }) {
 }
 
 DisplayError.propTypes = {
-  message: PropTypes.number,
+  message: PropTypes.string,
 };
 
 DisplayError.defaultProps = {
