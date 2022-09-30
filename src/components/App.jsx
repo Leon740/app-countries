@@ -6,7 +6,7 @@ import Loader from './Loader';
 import DisplayError from './DisplayError';
 import Container from './common/Container';
 import SearchControls from './SearchControls';
-import CardSmall from './CardSmall/CardSmall';
+// import CardSmall from './CardSmall/CardSmall';
 import CardLarge from './CardLarge/CardLarge';
 
 function App() {
@@ -68,7 +68,7 @@ function App() {
               {fnSearchInputOnChange().map((country) => (
                 <>
                   <CardLarge key={country.name.common} country={country} />
-                  <CardSmall key={country.name.common} country={country} />
+                  {/* <CardSmall key={country.name.common} country={country} /> */}
                 </>
               ))}
             </ul>
