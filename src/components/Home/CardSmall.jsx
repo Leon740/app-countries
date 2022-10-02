@@ -12,9 +12,9 @@ function CardSmall({ country }) {
   } = country;
 
   return (
-    <li className="p-8 grow-0 w-full sm:w-6/12 lg:w-4/12 xl:w-3/12 2xl:w-1/5">
+    <li className="p-8 grow-0 w-full md:w-6/12 xl:w-4/12 2xl:w-3/12">
       <div className="h-full rounded-lg overflow-hidden shadow-md shadow-slate-200 dark:shadow-gray-800 bg-white dark:bg-customgray-200">
-        <img src={flagUrl} alt={nameOfficial} className="w-full h-32 object-cover" />
+        <img src={flagUrl} alt={nameOfficial} className="h-48 w-full object-cover" />
         <section className="p-8">
           <h2 className="text-lg font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full">{nameCommon}</h2>
           <ul className="mt-6 mb-6">
