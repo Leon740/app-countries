@@ -1,4 +1,0 @@
-color mode toggle
-router
-data
-globus

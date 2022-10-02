@@ -5,21 +5,22 @@ import ALL_COUNTRIES from '../../data.json';
 import SearchControls from './SearchControls';
 import Container from '../common/Container';
 import DisplayError from './DisplayError';
-import CardSmall from './CardSmall/CardSmall';
+import CardSmall from './CardSmall';
 
 function Home() {
   const [stCountries, setStCountries] = useState(ALL_COUNTRIES);
 
-  function fnSearch(type) {
+  function fnSearchBy(type) {
     // eslint-disable-next-line func-names
     return function (value) {
+      console.log(value);
       let result;
       switch (type) {
-        case 'name': result = stCountries.filter((country) => fnSanitizeString(country.name.common).includes(fnSanitizeString(value)));
+        case 'name': result = ALL_COUNTRIES.filter((country) => fnSanitizeString(country.name.common).includes(fnSanitizeString(value)));
           break;
-        case 'region': result = stCountries.filter((country) => fnSanitizeString(country.region).includes(fnSanitizeString(value)));
+        case 'region': result = ALL_COUNTRIES.filter((country) => fnSanitizeString(country.region).includes(fnSanitizeString(value)));
           break;
-        default:
+        default: result = ALL_COUNTRIES;
       }
       console.log(result);
       setStCountries(result || ALL_COUNTRIES);
@@ -27,12 +28,12 @@ function Home() {
   }
 
   useEffect(() => {
-    console.clear();
-    stCountries.map((country) => console.log(country.name.common));
+    // console.clear();
+    // stCountries.map((country) => console.log(country.name.common));
   }, [stCountries]);
 
-  const fnSearchByName = fnSearch('name');
-  const fnSearchByRegion = fnSearch('region');
+  const fnSearchByName = fnSearchBy('name');
+  const fnSearchByRegion = fnSearchBy('region');
 
   return (
     <main>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsMoon } from 'react-icons/bs';
-import Container from './common/Container';
+import Container from '../common/Container';
 
 function Header() {
   // dark mode preference

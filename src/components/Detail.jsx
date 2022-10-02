@@ -2,8 +2,8 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { BsArrowLeftShort } from 'react-icons/bs';
-import Container from '../common/Container';
-import Feature from './Feature';
+import Container from './common/Container';
+import Feature from './global/Feature';
 
 function Detail() {
   const { state: country } = useLocation();
