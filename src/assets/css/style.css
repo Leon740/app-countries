@@ -580,7 +580,9 @@ video {
       --tw-shadow: var(--tw-shadow-colored) !important;
     }
 
-.select__single-value {
+.select__single-value, 
+    .select__placeholder, 
+    .select__indicator {
     --tw-text-opacity: 1 !important;
     color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
   }
@@ -603,11 +605,6 @@ video {
 
 .select__indicator {
     padding: 0px !important;
-  }
-
-.select__indicator {
-    --tw-text-opacity: 1 !important;
-    color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
   }
 
 .select__indicator svg {
@@ -633,6 +630,7 @@ video {
           --tw-shadow: var(--tw-shadow-colored) !important;
         }
       .dark .select__single-value, 
+        .dark .select__placeholder, 
         .dark .select__indicator {
         --tw-text-opacity: 1 !important;
         color: rgb(255 255 255 / var(--tw-text-opacity)) !important;

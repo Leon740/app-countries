@@ -20,7 +20,7 @@ function SearchControls({ fnInputOnChange, fnSelectOnChange }) {
       </div>
 
       <div className="pl-8 pr-8 mt-8 sm:mt-0 sm:w-4/12 lg:w-3/12 2xl:w-2/12">
-        <Select placeholder="Region" classNamePrefix="select" options={REGION_SELECT_OPTIONS} value={{ value: 'all', label: 'All' }} onChange={(option) => fnSelectOnChange(option.value)} />
+        <Select placeholder="Region" classNamePrefix="select" options={REGION_SELECT_OPTIONS} onChange={(option) => fnSelectOnChange(option.value)} />
       </div>
     </div>
   );

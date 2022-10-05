@@ -72,7 +72,9 @@ input::placeholder {
       }
     }
 
-    &__single-value {
+    &__single-value,
+    &__placeholder,
+    &__indicator {
       @apply text-black !important;
     }
 
@@ -89,7 +91,7 @@ input::placeholder {
     }
 
     &__indicator {
-      @apply text-black p-0 !important;
+      @apply p-0 !important;
 
       svg {
         width: 24px;
@@ -114,6 +116,7 @@ input::placeholder {
         }
 
         &__single-value,
+        &__placeholder,
         &__indicator {
           @apply text-white !important;
         }
