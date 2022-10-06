@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useState } from 'react';
+import ALL_COUNTRIES from './all_countries.json';
 import fnSanitizeString from '../../utils/fnSanitizeString';
-import ALL_COUNTRIES from '../../data.json';
-import SearchControls from './SearchControls';
+import Header from './Header';
+import Sidebar from './Sidebar/Sidebar';
 import Container from '../common/Container';
 import DisplayError from './DisplayError';
 import CardSmall from './CardSmall';
@@ -12,7 +13,7 @@ function Home() {
   const [stDisplayCountries, setStDisplayCountries] = useState(ALL_COUNTRIES);
   const [stMatchingCountries, setStMatchingCountries] = useState(ALL_COUNTRIES);
 
-  function fnSearchBy(type) {
+  function fnFilterBy(type) {
     // eslint-disable-next-line func-names
     return function (value) {
       console.log(value);
@@ -32,23 +33,33 @@ function Home() {
     };
   }
 
-  const fnSearchByName = fnSearchBy('name');
-  const fnSearchByRegion = fnSearchBy('region');
+  const fnFilterByName = fnFilterBy('name');
+  const fnFilterByRegion = fnFilterBy('region');
 
   return (
     <main>
-      <Container>
-        <SearchControls fnInputOnChange={fnSearchByName} fnSelectOnChange={fnSearchByRegion} />
+      <Header />
+      <Container className="flex max-w-full">
+        <div className="xl:w-3/12 xl:pr-8">
+          <Sidebar fnNameOnChange={fnFilterByName} fnRegionOnChange={fnFilterByRegion} />
+        </div>
+        <div className="xl:w-9/12 xl:pl-8">
+          <div className="mt-16 mb-16">
+            Total:
+            {' '}
+            {stDisplayCountries.length}
+          </div>
 
-        {stDisplayCountries.length > 0
-          ? (
-            <ul className="flex flex-wrap -mt-8 -ml-8 -mr-8 mb-8">
-              {stDisplayCountries.map((country) => <CardSmall key={country.name.common} country={country} />)}
-            </ul>
-          )
-          : (
-            <DisplayError message="Country not found." />
-          )}
+          {stDisplayCountries.length > 0
+            ? (
+              <ul className="flex flex-wrap -m-8">
+                {stDisplayCountries.map((country) => <CardSmall key={country.name.common} country={country} />)}
+              </ul>
+            )
+            : (
+              <DisplayError message="Country not found." />
+            )}
+        </div>
       </Container>
     </main>
   );

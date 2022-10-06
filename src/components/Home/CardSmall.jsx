@@ -94,7 +94,7 @@ CardSmall.defaultProps = {
     region: 'region',
     population: 0,
     languages: {},
-    timezones: ['lang'],
+    timezones: ['time'],
     currencies: {},
   },
 };

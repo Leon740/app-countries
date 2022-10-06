@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Region",
+    "options": [
+      "Americas",
+      "Europe",
+      "Asia",
+      "Africa"
+    ]
+  }
+]

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsMoon } from 'react-icons/bs';
+import { VscThreeBars } from 'react-icons/vsc';
 import Container from '../common/Container';
 
 function Header() {
@@ -16,9 +17,14 @@ function Header() {
   }
 
   return (
-    <header className="shadow-md shadow-slate-200 dark:shadow-gray-800 sticky top-0 z-20 bg-white dark:bg-customgray-200">
-      <Container as="section" className="pt-4 pb-4 flex items-center justify-between">
-        <h1 className="text-lg font-bold">Countries App</h1>
+    <header className="sticky top-0 z-20 h-20 bg-white dark:bg-customgray-200 shadow-md shadow-slate-200 dark:shadow-gray-800">
+      <Container className="max-w-full pt-4 pb-4 flex items-center justify-between">
+        <div className="flex items-center">
+          <button type="button" className="p-2 bg-white dark:bg-customgray-200 shadow-md shadow-slate-200 dark:shadow-gray-800 rounded-full text-black dark:text-white focus:shadow-inner focus:shadow-slate-300 dark:focus:shadow-gray-900">
+            <VscThreeBars className="text-xl" />
+          </button>
+          <h1 className="text-lg font-bold ml-4">Countries App</h1>
+        </div>
 
         <button type="button" onClick={fnBtnOnClick} className="flex items-center pt-2 pb-2 pl-4 pr-4 rounded-lg bg-white dark:bg-customgray-200 shadow-md shadow-slate-200 dark:shadow-gray-800 hover:shadow-inner hover:shadow-slate-300 dark:hover:shadow-gray-900">
           <BsMoon />

@@ -20,7 +20,7 @@ Feature.propTypes = {
 
 Feature.defaultProps = {
   name: 'name',
-  children: 'content',
+  children: 'feature',
 };
 
 export default Feature;
