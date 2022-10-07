@@ -5,23 +5,25 @@ import FILTERS from './filters.json';
 import FilterByName from './FilterByName';
 import Accordion from './Accordion';
 
-function Sidebar({ fnNameOnChange, fnRegionOnChange }) {
+function Sidebar({ fnNameOnChange, fnRegionAdd, fnRegionRemove }) {
   return (
     <div className="h-full min-h-screen p-8 bg-white dark:bg-customgray-200 shadow-md shadow-slate-200 dark:shadow-gray-800">
       <FilterByName fnOnChange={fnNameOnChange} />
-      {FILTERS.map((filter, index) => <Accordion key={index} name={filter.name} options={filter.options} fnCheckboxOnChange={fnRegionOnChange} />)}
+      {FILTERS.map((filter, index) => <Accordion key={index} name={filter.name} options={filter.options} fnSelect={fnRegionAdd} fnUnSelect={fnRegionRemove} />)}
     </div>
   );
 }
 
 Sidebar.propTypes = {
   fnNameOnChange: PropTypes.func,
-  fnRegionOnChange: PropTypes.func,
+  fnRegionAdd: PropTypes.func,
+  fnRegionRemove: PropTypes.func,
 };
 
 Sidebar.defaultProps = {
   fnNameOnChange: () => {},
-  fnRegionOnChange: () => {},
+  fnRegionAdd: () => {},
+  fnRegionRemove: () => {},
 };
 
 export default Sidebar;

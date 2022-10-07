@@ -12,52 +12,54 @@ function CardSmall({ country }) {
   } = country;
 
   return (
-    <li className="p-8 grow-0 w-full md:w-6/12 xl:w-4/12 2xl:w-3/12">
-      <div className="h-full rounded-lg overflow-hidden shadow-md shadow-slate-200 dark:shadow-gray-800 bg-white dark:bg-customgray-200">
-        <img src={flagUrl} alt={nameOfficial} className="h-48 w-full object-cover" />
-        <section className="p-8">
-          <h2 className="text-lg font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full">{nameCommon}</h2>
-          <ul className="mt-6 mb-6">
-            <Feature name="Region">{region}</Feature>
-            <Feature name="Population">{population.toLocaleString()}</Feature>
-            <Feature name="Languages">
-              <ul>
-                {languages && Object.values(languages).map((language, index) => (
-                  <li key={index}>
-                    {language}
-                  </li>
-                ))}
-              </ul>
-            </Feature>
-            <Feature name="Timezones">
-              <ul>
-                {timezones.map((timezone, index) => (
-                  <li key={index}>
-                    {timezone}
-                  </li>
-                ))}
-              </ul>
-            </Feature>
-            <Feature name="Currencies">
-              <ul>
-                {currencies && Object.values(currencies).map((currency, index) => (
-                  <li key={index}>
-                    {currency.symbol}
-                    {' '}
-                    -
-                    {' '}
-                    {currency.name}
-                  </li>
-                ))}
-              </ul>
-            </Feature>
-          </ul>
+    <li className="p-8 grow-0 w-full md:w-6/12 lg:w-4/12 2xl:w-3/12">
+      <div className="flex flex-col h-full rounded-lg overflow-hidden shadow-md shadow-slate-200 dark:shadow-gray-800 bg-white dark:bg-customgray-200">
+        <img src={flagUrl} alt={nameOfficial} className="shrink-0 h-48 w-full object-cover" />
+        <div className="h-full p-8 flex flex-col justify-between">
+          <section>
+            <h2 className="text-lg font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full">{nameCommon}</h2>
+            <ul className="mt-6 mb-6">
+              <Feature name="Region">{region}</Feature>
+              <Feature name="Population">{population.toLocaleString()}</Feature>
+              <Feature name="Languages">
+                <ul>
+                  {languages && Object.values(languages).map((language, index) => (
+                    <li key={index}>
+                      {language}
+                    </li>
+                  ))}
+                </ul>
+              </Feature>
+              <Feature name="Timezones">
+                <ul>
+                  {timezones.map((timezone, index) => (
+                    <li key={index}>
+                      {timezone}
+                    </li>
+                  ))}
+                </ul>
+              </Feature>
+              <Feature name="Currencies">
+                <ul>
+                  {currencies && Object.values(currencies).map((currency, index) => (
+                    <li key={index}>
+                      {currency.symbol}
+                      {' '}
+                      -
+                      {' '}
+                      {currency.name}
+                    </li>
+                  ))}
+                </ul>
+              </Feature>
+            </ul>
+          </section>
 
           <Link to={`/country/${code}`} state={country} className="max-w-max flex items-center pt-2 pb-2 pl-4 pr-2 rounded-lg bg-white dark:bg-customgray-200 shadow-md shadow-slate-200 dark:shadow-gray-800 hover:shadow-inner hover:shadow-slate-300 dark:hover:shadow-gray-900">
             <span className="text-base mr-2">View</span>
             <BsArrowRightShort className="text-2xl" />
           </Link>
-        </section>
+        </div>
       </div>
     </li>
   );

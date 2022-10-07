@@ -3,11 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FilterByCheckbox from './FilterByCheckbox';
 
-function Accordion({ name, options, fnCheckboxOnChange }) {
+function Accordion({
+  name, options, fnSelect, fnUnSelect,
+}) {
   return (
     <div className="mt-8">
       <p className="text-lg">{name}</p>
-      {options.map((option, index) => <FilterByCheckbox key={index} name={name} label={option} fnOnChange={fnCheckboxOnChange} />)}
+      {options.map((option, index) => <FilterByCheckbox key={index} label={option} fnSelect={fnSelect} fnUnSelect={fnUnSelect} />)}
     </div>
   );
 }
@@ -15,13 +17,15 @@ function Accordion({ name, options, fnCheckboxOnChange }) {
 Accordion.propTypes = {
   name: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string),
-  fnCheckboxOnChange: PropTypes.func,
+  fnSelect: PropTypes.func,
+  fnUnSelect: PropTypes.func,
 };
 
 Accordion.defaultProps = {
   name: 'name',
   options: ['filter'],
-  fnCheckboxOnChange: () => {},
+  fnSelect: () => {},
+  fnUnSelect: () => {},
 };
 
 export default Accordion;
