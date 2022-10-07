@@ -9,11 +9,12 @@ import DisplayError from './DisplayError';
 import CardSmall from './CardSmall';
 
 function Home() {
-  // eslint-disable-next-line no-unused-vars
   const [stCountries, setStCountries] = useState({
     display: ALL_COUNTRIES,
     match: [],
   });
+
+  const [stNameValue, setStNameValue] = useState('');
 
   function fnFilterBy(type) {
     // eslint-disable-next-line func-names
@@ -22,12 +23,31 @@ function Home() {
       switch (type) {
         case 'name':
           result = (stCountries.match.length ? stCountries.match : ALL_COUNTRIES).filter((country) => fnSanitizeString(country.name.common).includes(fnSanitizeString(value)));
-          setStCountries((prev) => ({ ...prev, display: result }));
+          setStCountries((prev) => ({
+            ...prev,
+            display: result,
+          }));
+          setStNameValue(value);
           break;
 
         case 'regionAdd':
           result = ALL_COUNTRIES.filter((country) => fnSanitizeString(country.region).includes(fnSanitizeString(value)));
-          setStCountries((prev) => ({ ...prev, match: prev.match.concat(result), display: prev.match.concat(result) }));
+          setStCountries((prev) => ({
+            ...prev,
+            match: prev.match.concat(result),
+            display: prev.match.concat(result),
+          }));
+          setStNameValue('');
+          break;
+
+        case 'regionRemove':
+          result = ALL_COUNTRIES.filter((country) => fnSanitizeString(country.region).includes(fnSanitizeString(value)));
+          setStCountries((prev) => ({
+            ...prev,
+            match: prev.match.filter((country) => result.indexOf(country) === -1),
+            display: prev.match.filter((country) => result.indexOf(country) === -1).length > 0 ? prev.match.filter((country) => result.indexOf(country) === -1) : ALL_COUNTRIES,
+          }));
+          setStNameValue('');
           break;
 
         default: result = ALL_COUNTRIES;
@@ -44,7 +64,7 @@ function Home() {
       <Header />
       <Container className="flex max-w-full">
         <div className="xl:w-3/12 xl:pr-8 2xl:w-1/5">
-          <Sidebar fnNameOnChange={fnFilterByName} fnRegionAdd={fnFilterByRegionAdd} fnRegionRemove={fnFilterByRegionRemove} />
+          <Sidebar nameValue={stNameValue} fnNameOnChange={fnFilterByName} fnRegionAdd={fnFilterByRegionAdd} fnRegionRemove={fnFilterByRegionRemove} />
         </div>
         <div className="xl:w-9/12 xl:pl-8 2xl:w-4/5">
           <div className="mt-16 mb-16">
