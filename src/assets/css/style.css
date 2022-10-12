@@ -645,6 +645,10 @@ video {
         }
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -667,6 +671,22 @@ video {
 
 .top-4 {
   top: 1rem;
+}
+
+.top-20 {
+  top: 5rem;
+}
+
+.-left-64 {
+  left: -16rem;
+}
+
+.left-64 {
+  left: 16rem;
+}
+
+.left-0 {
+  left: 0px;
 }
 
 .z-20 {
@@ -770,8 +790,20 @@ video {
   height: 4rem;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
+.h-max {
+  height: max-content;
+}
+
 .min-h-screen {
   min-height: 100vh;
+}
+
+.min-h-max {
+  min-height: max-content;
 }
 
 .w-full {
@@ -780,6 +812,10 @@ video {
 
 .w-16 {
   width: 4rem;
+}
+
+.w-64 {
+  width: 16rem;
 }
 
 .max-w-max {
@@ -808,12 +844,20 @@ video {
   animation: spin 1s linear infinite;
 }
 
+.resize {
+  resize: both;
+}
+
 .flex-col {
   flex-direction: column;
 }
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.items-end {
+  align-items: flex-end;
 }
 
 .items-center {
@@ -830,6 +874,10 @@ video {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .text-ellipsis {
@@ -961,6 +1009,30 @@ video {
   padding-left: 4rem;
 }
 
+.pb-20 {
+  padding-bottom: 5rem;
+}
+
+.pr-1 {
+  padding-right: 0.25rem;
+}
+
+.pr-3 {
+  padding-right: 0.75rem;
+}
+
+.pb-40 {
+  padding-bottom: 10rem;
+}
+
+.pb-32 {
+  padding-bottom: 8rem;
+}
+
+.pt-20 {
+  padding-top: 5rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -993,6 +1065,11 @@ video {
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .font-bold {
@@ -1030,6 +1107,16 @@ video {
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
 }
 
 /* Fonts */
@@ -1229,6 +1316,22 @@ input::placeholder {
 }
 
 @media (min-width: 1280px) {
+  .xl\:sticky {
+    position: sticky;
+  }
+
+  .xl\:left-0 {
+    left: 0px;
+  }
+
+  .xl\:top-20 {
+    top: 5rem;
+  }
+
+  .xl\:-top-20 {
+    top: -5rem;
+  }
+
   .xl\:w-3\/12 {
     width: 25%;
   }
@@ -1241,12 +1344,24 @@ input::placeholder {
     width: 33.333333%;
   }
 
+  .xl\:w-full {
+    width: 100%;
+  }
+
   .xl\:pr-8 {
     padding-right: 2rem;
   }
 
   .xl\:pl-8 {
     padding-left: 2rem;
+  }
+
+  .xl\:pt-0 {
+    padding-top: 0px;
+  }
+
+  .xl\:pb-20 {
+    padding-bottom: 5rem;
   }
 }
 

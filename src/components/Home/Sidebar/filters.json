@@ -1,12 +1,16 @@
-[
-  {
-    "name": "Region",
-    "options": [
-      "Americas",
-      "Europe",
-      "Asia",
-      "Africa",
-      "Oceania"
-    ]
-  }
-]
+{
+  "regions": [
+    "Americas",
+    "Europe",
+    "Asia",
+    "Africa",
+    "Antarctic",
+    "Oceania"
+  ],
+  "languages": [
+    "English",
+    "Spanish",
+    "Russian",
+    "Ukrainian"
+  ]
+}

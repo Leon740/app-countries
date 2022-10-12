@@ -35808,7 +35808,8 @@
         "region": "Europe",
         "subregion": "Eastern Europe",
         "languages": {
-            "ukr": "Ukrainian"
+            "ukr": "Ukrainian",
+            "rus": "Russian"
         },
         "translations": {
             "ara": {

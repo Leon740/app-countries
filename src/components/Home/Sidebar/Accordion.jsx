@@ -8,7 +8,14 @@ function Accordion({
 }) {
   return (
     <div className="mt-8">
-      <p className="text-lg">{name}</p>
+      <div className="flex items-center">
+        <p className="text-lg">{name}</p>
+        <span className="text-sm ml-2">
+          (
+          {options.length}
+          )
+        </span>
+      </div>
       {options.map((option, index) => <FilterByCheckbox key={index} label={option} fnSelect={fnSelect} fnUnSelect={fnUnSelect} />)}
     </div>
   );

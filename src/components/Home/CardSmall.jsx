@@ -8,7 +8,7 @@ import Feature from '../global/Feature';
 
 function CardSmall({ country }) {
   const {
-    name: { common: nameCommon, official: nameOfficial }, cca2: code, flags: { svg: flagUrl }, region, population, languages, timezones, currencies,
+    name: { common: nameCommon, official: nameOfficial }, cca2: code, flags: { svg: flagUrl }, region, population, languages, timezones,
   } = country;
 
   return (
@@ -35,19 +35,6 @@ function CardSmall({ country }) {
                   {timezones.map((timezone, index) => (
                     <li key={index}>
                       {timezone}
-                    </li>
-                  ))}
-                </ul>
-              </Feature>
-              <Feature name="Currencies">
-                <ul>
-                  {currencies && Object.values(currencies).map((currency, index) => (
-                    <li key={index}>
-                      {currency.symbol}
-                      {' '}
-                      -
-                      {' '}
-                      {currency.name}
                     </li>
                   ))}
                 </ul>
@@ -79,7 +66,6 @@ CardSmall.propTypes = {
     population: PropTypes.number,
     languages: PropTypes.object,
     timezones: PropTypes.array,
-    currencies: PropTypes.object,
   }),
 };
 
@@ -97,7 +83,6 @@ CardSmall.defaultProps = {
     population: 0,
     languages: {},
     timezones: ['time'],
-    currencies: {},
   },
 };
 
