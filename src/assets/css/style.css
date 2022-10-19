@@ -529,122 +529,6 @@ video {
   }
 }
 
-.select__control {
-    border-radius: 0.5rem !important;
-  }
-
-.select__control {
-    border-width: 0px !important;
-  }
-
-.select__control {
-    --tw-bg-opacity: 1 !important;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
-  }
-
-.select__control {
-    padding-top: 1rem !important;
-  }
-
-.select__control {
-    padding-bottom: 1rem !important;
-  }
-
-.select__control {
-    padding-left: 1rem !important;
-  }
-
-.select__control {
-    padding-right: 1rem !important;
-  }
-
-.select__control {
-    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
-    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color) !important;
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
-  }
-
-.select__control {
-    --tw-shadow-color: #e2e8f0 !important;
-    --tw-shadow: var(--tw-shadow-colored) !important;
-  }
-
-.select__control--is-focused {
-      --tw-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05) !important;
-      --tw-shadow-colored: inset 0 2px 4px 0 var(--tw-shadow-color) !important;
-      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
-    }
-
-.select__control--is-focused {
-      --tw-shadow-color: #cbd5e1 !important;
-      --tw-shadow: var(--tw-shadow-colored) !important;
-    }
-
-.select__single-value, 
-    .select__placeholder, 
-    .select__indicator {
-    --tw-text-opacity: 1 !important;
-    color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
-  }
-
-.select__value-container {
-    padding: 0px !important;
-  }
-
-.select__input-container {
-    margin: 0px !important;
-  }
-
-.select__input-container {
-    padding: 0px !important;
-  }
-
-.select__indicator-separator {
-    display: none;
-  }
-
-.select__indicator {
-    padding: 0px !important;
-  }
-
-.select__indicator svg {
-      width: 24px;
-      height: 24px;
-    }
-
-.select__menu-list {
-    padding: 0px !important;
-  }
-
-@media (prefers-color-scheme: dark) {
-      .dark .select__control {
-        --tw-bg-opacity: 1 !important;
-        background-color: rgb(43 55 67 / var(--tw-bg-opacity)) !important;
-      }
-      .dark .select__control {
-        --tw-shadow-color: #1f2937 !important;
-        --tw-shadow: var(--tw-shadow-colored) !important;
-      }
-        .dark .select__control--is-focused {
-          --tw-shadow-color: #111827 !important;
-          --tw-shadow: var(--tw-shadow-colored) !important;
-        }
-      .dark .select__single-value, 
-        .dark .select__placeholder, 
-        .dark .select__indicator {
-        --tw-text-opacity: 1 !important;
-        color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-      }
-      .dark .select__menu-list {
-        --tw-bg-opacity: 1 !important;
-        background-color: rgb(43 55 67 / var(--tw-bg-opacity)) !important;
-      }
-        .dark .select__option--is-focused {
-          --tw-bg-opacity: 1 !important;
-          background-color: rgb(31 41 55 / var(--tw-bg-opacity)) !important;
-        }
-}
-
 .fixed {
   position: fixed;
 }
@@ -673,12 +557,16 @@ video {
   top: 1rem;
 }
 
-.-left-64 {
-  left: -16rem;
+.top-20 {
+  top: 5rem;
 }
 
 .left-0 {
   left: 0px;
+}
+
+.-left-64 {
+  left: -16rem;
 }
 
 .z-20 {
@@ -780,14 +668,6 @@ video {
 
 .h-16 {
   height: 4rem;
-}
-
-.h-screen {
-  height: 100vh;
-}
-
-.min-h-max {
-  min-height: max-content;
 }
 
 .w-full {
@@ -989,10 +869,6 @@ video {
   padding-left: 4rem;
 }
 
-.pt-20 {
-  padding-top: 5rem;
-}
-
 .text-center {
   text-align: center;
 }
@@ -1030,11 +906,6 @@ video {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 
 .font-bold {
@@ -1285,14 +1156,6 @@ input::placeholder {
     position: sticky;
   }
 
-  .xl\:top-20 {
-    top: 5rem;
-  }
-
-  .xl\:left-0 {
-    left: 0px;
-  }
-
   .xl\:w-3\/12 {
     width: 25%;
   }
@@ -1315,14 +1178,6 @@ input::placeholder {
 
   .xl\:pl-8 {
     padding-left: 2rem;
-  }
-
-  .xl\:pt-0 {
-    padding-top: 0px;
-  }
-
-  .xl\:pb-20 {
-    padding-bottom: 5rem;
   }
 }
 
