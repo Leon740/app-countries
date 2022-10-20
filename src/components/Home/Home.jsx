@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import React, { useState } from 'react';
 import ALL_COUNTRIES from './all_countries.json';
 import fnSanitize from '../../utils/fnSanitize';
@@ -27,8 +26,8 @@ function Home() {
       let result;
       switch (type) {
         case 'name':
-          result = (stCountries.match.length > 0 ? stCountries.match : ALL_COUNTRIES).filter((country) => fnSanitize(country.name.common).includes(fnSanitize(value)));
           setStNameValue(value);
+          result = (stCountries.match.length > 0 ? stCountries.match : ALL_COUNTRIES).filter((country) => fnSanitize(country.name.common).includes(fnSanitize(value)));
           setStCountries((prev) => ({
             ...prev,
             display: result,
@@ -36,47 +35,47 @@ function Home() {
           break;
 
         case 'regionAdd':
+          setStNameValue('');
           result = ALL_COUNTRIES.filter((country) => fnSanitize(country.region).includes(fnSanitize(value)));
           setStCountries((prev) => ({
             ...prev,
-            regions: prev.regions.concat(fnFindUniqueArray(result, prev.regions)),
-            match: fnFindIntersectionArray(prev.regions.concat(result), prev.languages),
-            display: fnFindIntersectionArray(prev.regions.concat(result), prev.languages),
+            regions: prev.regions.concat(result),
+            match: fnFindIntersectionArray(prev.regions.concat(result), prev.languages.length > 0 ? prev.languages : ALL_COUNTRIES),
+            display: fnFindIntersectionArray(prev.regions.concat(result), prev.languages.length > 0 ? prev.languages : ALL_COUNTRIES),
           }));
-          setStNameValue('');
           break;
 
         case 'regionRemove':
+          setStNameValue('');
           result = stCountries.regions.filter((country) => !fnSanitize(country.region).includes(fnSanitize(value)));
           setStCountries((prev) => ({
             ...prev,
             regions: result,
-            match: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.languages),
-            display: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.languages),
+            match: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.languages.length > 0 ? prev.languages : ALL_COUNTRIES),
+            display: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.languages.length > 0 ? prev.languages : ALL_COUNTRIES),
           }));
-          setStNameValue('');
           break;
 
         case 'languageAdd':
+          setStNameValue('');
           result = ALL_COUNTRIES.filter((country) => fnSanitize(country.languages).includes(fnSanitize(value)));
           setStCountries((prev) => ({
             ...prev,
             languages: prev.languages.concat(fnFindUniqueArray(result, prev.languages)),
-            match: fnFindIntersectionArray(prev.languages.concat(fnFindUniqueArray(result, prev.languages)), prev.regions),
-            display: fnFindIntersectionArray(prev.languages.concat(fnFindUniqueArray(result, prev.languages)), prev.regions),
+            match: fnFindIntersectionArray(prev.languages.concat(fnFindUniqueArray(result, prev.languages)), prev.regions.length > 0 ? prev.regions : ALL_COUNTRIES),
+            display: fnFindIntersectionArray(prev.languages.concat(fnFindUniqueArray(result, prev.languages)), prev.regions.length > 0 ? prev.regions : ALL_COUNTRIES),
           }));
-          setStNameValue('');
           break;
 
         case 'languageRemove':
+          setStNameValue('');
           result = stCountries.languages.filter((country) => !fnSanitize(country.languages).includes(fnSanitize(value)));
           setStCountries((prev) => ({
             ...prev,
             languages: result,
-            match: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.regions),
-            display: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.regions),
+            match: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.regions.length > 0 ? prev.regions : ALL_COUNTRIES),
+            display: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.regions.length > 0 ? prev.regions : ALL_COUNTRIES),
           }));
-          setStNameValue('');
           break;
 
         default: result = ALL_COUNTRIES;
