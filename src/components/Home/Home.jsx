@@ -20,6 +20,14 @@ function Home() {
 
   const [stNameValue, setStNameValue] = useState('');
 
+  function fnGetAllCountriesIfArrayIsEmpty(array) {
+    if (array.length > 0) {
+      return array;
+    }
+
+    return ALL_COUNTRIES;
+  }
+
   function fnFilterBy(type) {
     // eslint-disable-next-line func-names
     return function (value) {
@@ -40,8 +48,8 @@ function Home() {
           setStCountries((prev) => ({
             ...prev,
             regions: prev.regions.concat(result),
-            match: fnFindIntersectionArray(prev.regions.concat(result), prev.languages.length > 0 ? prev.languages : ALL_COUNTRIES),
-            display: fnFindIntersectionArray(prev.regions.concat(result), prev.languages.length > 0 ? prev.languages : ALL_COUNTRIES),
+            match: fnFindIntersectionArray(prev.regions.concat(result), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
+            display: fnFindIntersectionArray(prev.regions.concat(result), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
           }));
           break;
 
@@ -51,8 +59,8 @@ function Home() {
           setStCountries((prev) => ({
             ...prev,
             regions: result,
-            match: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.languages.length > 0 ? prev.languages : ALL_COUNTRIES),
-            display: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.languages.length > 0 ? prev.languages : ALL_COUNTRIES),
+            match: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(result), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
+            display: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(result), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
           }));
           break;
 
@@ -62,8 +70,8 @@ function Home() {
           setStCountries((prev) => ({
             ...prev,
             languages: prev.languages.concat(fnFindUniqueArray(result, prev.languages)),
-            match: fnFindIntersectionArray(prev.languages.concat(fnFindUniqueArray(result, prev.languages)), prev.regions.length > 0 ? prev.regions : ALL_COUNTRIES),
-            display: fnFindIntersectionArray(prev.languages.concat(fnFindUniqueArray(result, prev.languages)), prev.regions.length > 0 ? prev.regions : ALL_COUNTRIES),
+            match: fnFindIntersectionArray(prev.languages.concat(fnFindUniqueArray(result, prev.languages)), fnGetAllCountriesIfArrayIsEmpty(prev.regions)),
+            display: fnFindIntersectionArray(prev.languages.concat(fnFindUniqueArray(result, prev.languages)), fnGetAllCountriesIfArrayIsEmpty(prev.regions)),
           }));
           break;
 
@@ -73,8 +81,8 @@ function Home() {
           setStCountries((prev) => ({
             ...prev,
             languages: result,
-            match: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.regions.length > 0 ? prev.regions : ALL_COUNTRIES),
-            display: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, prev.regions.length > 0 ? prev.regions : ALL_COUNTRIES),
+            match: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, fnGetAllCountriesIfArrayIsEmpty(prev.regions)),
+            display: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, fnGetAllCountriesIfArrayIsEmpty(prev.regions)),
           }));
           break;
 
