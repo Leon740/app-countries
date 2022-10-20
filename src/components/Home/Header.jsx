@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import AppContext from './AppContext';
 import useWindowSize from '../../hooks/useWindowSize';
 import { BsMoon } from 'react-icons/bs';
@@ -44,4 +44,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default memo(Header);
