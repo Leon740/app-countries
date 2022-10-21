@@ -6,32 +6,23 @@ import Accordion from './Accordion';
 
 function Sidebar() {
   const {
-    countries, stSidebar, fnRegionAdd, fnRegionRemove, fnLanguageAdd, fnLanguageRemove,
+    countries, stSidebar, fnRegionAdd, fnRegionRemove, fnLanguageAdd, fnLanguageRemove, fnTimezoneAdd, fnTimezoneRemove,
   } = useContext(AppContext);
 
-  // regions
   const regions = Array.from(new Set(countries.map((country) => country.region)));
-
-  function getCountriesQtyByRegion(region = 'Europe') {
-    return countries.filter((country) => fnSanitize(country.region).includes(fnSanitize(region))).length;
-  }
-
-  const optionsRegions = regions.map((region) => ({
-    label: region,
-    qty: getCountriesQtyByRegion(region),
-  }));
-
-  // languages
   const languages = ['English', 'Russian', 'Ukrainian', 'Spanish'];
+  const timezones = ['UTC-04:00', 'UTC+14:00', 'UTC+12:00'];
 
-  function getCountriesQtyByLanguage(language = 'English') {
-    return countries.filter((country) => fnSanitize(country.languages).includes(fnSanitize(language))).length;
+  function fnGetOptionsByArray(array, key) {
+    return array.map((label) => ({
+      label,
+      qty: countries.filter((country) => fnSanitize(country[key]).includes(fnSanitize(label))).length,
+    }));
   }
 
-  const optionsLanguages = languages.map((language) => ({
-    label: language,
-    qty: getCountriesQtyByLanguage(language),
-  }));
+  const optionsRegions = fnGetOptionsByArray(regions, 'region');
+  const optionsLanguages = fnGetOptionsByArray(languages, 'languages');
+  const optionsTimezones = fnGetOptionsByArray(timezones, 'timezones');
 
   return (
     <div
@@ -45,6 +36,7 @@ function Sidebar() {
         <FilterByName />
         <Accordion name="Regions" options={optionsRegions} fnSelect={fnRegionAdd} fnUnSelect={fnRegionRemove} />
         <Accordion name="Languages" options={optionsLanguages} fnSelect={fnLanguageAdd} fnUnSelect={fnLanguageRemove} />
+        <Accordion name="Timezones" options={optionsTimezones} fnSelect={fnTimezoneAdd} fnUnSelect={fnTimezoneRemove} />
       </div>
     </div>
   );

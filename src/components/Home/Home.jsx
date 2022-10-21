@@ -1,7 +1,8 @@
+/* eslint-disable no-case-declarations */
 import React, { useState } from 'react';
 import ALL_COUNTRIES from './all_countries.json';
 import fnSanitize from '../../utils/fnSanitize';
-import { fnFindIntersectionArray, fnFindUniqueArray } from '../../utils/array';
+import { fnFindIntersectionArray, fnFindUniqueArray } from '../../utils/arrays';
 import AppContext from './AppContext';
 import Header from './Header';
 import Sidebar from './Sidebar/Sidebar';
@@ -14,6 +15,7 @@ function Home() {
   const [stCountries, setStCountries] = useState({
     regions: [],
     languages: [],
+    timezones: [],
     match: [],
     display: ALL_COUNTRIES,
   });
@@ -45,11 +47,12 @@ function Home() {
         case 'regionAdd':
           setStNameValue('');
           result = ALL_COUNTRIES.filter((country) => fnSanitize(country.region).includes(fnSanitize(value)));
+          const regions = stCountries.regions.concat(result);
           setStCountries((prev) => ({
             ...prev,
-            regions: prev.regions.concat(result),
-            match: fnFindIntersectionArray(prev.regions.concat(result), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
-            display: fnFindIntersectionArray(prev.regions.concat(result), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
+            regions,
+            match: fnFindIntersectionArray(regions, fnGetAllCountriesIfArrayIsEmpty(prev.languages), fnGetAllCountriesIfArrayIsEmpty(prev.timezones)),
+            display: fnFindIntersectionArray(regions, fnGetAllCountriesIfArrayIsEmpty(prev.languages), fnGetAllCountriesIfArrayIsEmpty(prev.timezones)),
           }));
           break;
 
@@ -59,19 +62,20 @@ function Home() {
           setStCountries((prev) => ({
             ...prev,
             regions: result,
-            match: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(result), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
-            display: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(result), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
+            match: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(result), fnGetAllCountriesIfArrayIsEmpty(prev.languages), fnGetAllCountriesIfArrayIsEmpty(prev.timezones)),
+            display: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(result), fnGetAllCountriesIfArrayIsEmpty(prev.languages), fnGetAllCountriesIfArrayIsEmpty(prev.timezones)),
           }));
           break;
 
         case 'languageAdd':
           setStNameValue('');
           result = ALL_COUNTRIES.filter((country) => fnSanitize(country.languages).includes(fnSanitize(value)));
+          const languages = stCountries.languages.concat(fnFindUniqueArray(result, stCountries.languages));
           setStCountries((prev) => ({
             ...prev,
-            languages: prev.languages.concat(fnFindUniqueArray(result, prev.languages)),
-            match: fnFindIntersectionArray(prev.languages.concat(fnFindUniqueArray(result, prev.languages)), fnGetAllCountriesIfArrayIsEmpty(prev.regions)),
-            display: fnFindIntersectionArray(prev.languages.concat(fnFindUniqueArray(result, prev.languages)), fnGetAllCountriesIfArrayIsEmpty(prev.regions)),
+            languages,
+            match: fnFindIntersectionArray(languages, fnGetAllCountriesIfArrayIsEmpty(prev.regions), fnGetAllCountriesIfArrayIsEmpty(prev.timezones)),
+            display: fnFindIntersectionArray(languages, fnGetAllCountriesIfArrayIsEmpty(prev.regions), fnGetAllCountriesIfArrayIsEmpty(prev.timezones)),
           }));
           break;
 
@@ -81,8 +85,31 @@ function Home() {
           setStCountries((prev) => ({
             ...prev,
             languages: result,
-            match: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, fnGetAllCountriesIfArrayIsEmpty(prev.regions)),
-            display: fnFindIntersectionArray(result.length > 0 ? result : ALL_COUNTRIES, fnGetAllCountriesIfArrayIsEmpty(prev.regions)),
+            match: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(result), fnGetAllCountriesIfArrayIsEmpty(prev.regions), fnGetAllCountriesIfArrayIsEmpty(prev.timezones)),
+            display: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(result), fnGetAllCountriesIfArrayIsEmpty(prev.regions), fnGetAllCountriesIfArrayIsEmpty(prev.timezones)),
+          }));
+          break;
+
+        case 'timezoneAdd':
+          setStNameValue('');
+          result = ALL_COUNTRIES.filter((country) => fnSanitize(country.timezones).includes(fnSanitize(value)));
+          const timezones = stCountries.timezones.concat(fnFindUniqueArray(result, stCountries.timezones));
+          setStCountries((prev) => ({
+            ...prev,
+            timezones,
+            match: fnFindIntersectionArray(timezones, fnGetAllCountriesIfArrayIsEmpty(prev.regions), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
+            display: fnFindIntersectionArray(timezones, fnGetAllCountriesIfArrayIsEmpty(prev.regions), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
+          }));
+          break;
+
+        case 'timezoneRemove':
+          setStNameValue('');
+          result = stCountries.timezones.filter((country) => !fnSanitize(country.timezones).includes(fnSanitize(value)));
+          setStCountries((prev) => ({
+            ...prev,
+            timezones: result,
+            match: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(result), fnGetAllCountriesIfArrayIsEmpty(prev.regions), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
+            display: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(result), fnGetAllCountriesIfArrayIsEmpty(prev.regions), fnGetAllCountriesIfArrayIsEmpty(prev.languages)),
           }));
           break;
 
@@ -106,6 +133,8 @@ function Home() {
     fnRegionRemove: fnFilterBy('regionRemove'),
     fnLanguageAdd: fnFilterBy('languageAdd'),
     fnLanguageRemove: fnFilterBy('languageRemove'),
+    fnTimezoneAdd: fnFilterBy('timezoneAdd'),
+    fnTimezoneRemove: fnFilterBy('timezoneRemove'),
   };
 
   return (
