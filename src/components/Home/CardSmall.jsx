@@ -1,19 +1,20 @@
-/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { BsArrowRightShort } from 'react-icons/bs';
+import { BsArrowRightShort, BsHeart, BsHeartFill } from 'react-icons/bs';
 import Feature from '../global/Feature';
 
-function CardSmall({ country }) {
+function CardSmall({
+  country, isFavorite, fnFavoritesOnChange,
+}) {
   const {
     name: { common: nameCommon, official: nameOfficial }, cca2: code, flags: { svg: flagUrl }, region, population, languages, timezones,
   } = country;
 
   return (
     <li className="p-8 grow-0 w-full md:w-6/12 lg:w-4/12 2xl:w-3/12">
-      <div className="flex flex-col h-full rounded-lg overflow-hidden shadow-md shadow-slate-200 dark:shadow-gray-800 bg-white dark:bg-customgray-200">
+      <div className={`${isFavorite ? 'border-red-500' : 'border-transparent'} border-2 flex flex-col h-full rounded-lg overflow-hidden shadow-md shadow-slate-200 dark:shadow-gray-800 bg-white dark:bg-customgray-200`}>
         <img src={flagUrl} alt={nameOfficial} className="shrink-0 h-48 w-full object-cover" />
         <div className="h-full p-8 flex flex-col justify-between">
           <section>
@@ -42,10 +43,16 @@ function CardSmall({ country }) {
             </ul>
           </section>
 
-          <Link to={`/country/${code}`} state={country} className="max-w-max flex items-center pt-2 pb-2 pl-4 pr-2 rounded-lg bg-white dark:bg-customgray-200 shadow-md shadow-slate-200 dark:shadow-gray-800 hover:shadow-inner hover:shadow-slate-300 dark:hover:shadow-gray-900">
-            <span className="text-base mr-2">View</span>
-            <BsArrowRightShort className="text-2xl" />
-          </Link>
+          <div className="flex justify-between">
+            <Link to={`/country/${code}`} state={country} className="max-w-max flex items-center pt-2 pb-2 pl-4 pr-2 rounded-lg bg-white dark:bg-customgray-200 shadow-md shadow-slate-200 dark:shadow-gray-800 hover:shadow-inner hover:shadow-slate-300 dark:hover:shadow-gray-900">
+              <span className="text-base mr-2">View</span>
+              <BsArrowRightShort className="text-2xl" />
+            </Link>
+
+            <button type="button" onClick={() => fnFavoritesOnChange(country)} className="flex items-center justify-center w-10 h-10 rounded-full text-white bg-red-500 shadow-md shadow-red-300 dark:shadow-red-700 hover:shadow-inner hover:shadow-red-900">
+              {isFavorite ? <BsHeartFill /> : <BsHeart />}
+            </button>
+          </div>
         </div>
       </div>
     </li>
@@ -64,9 +71,12 @@ CardSmall.propTypes = {
     }),
     region: PropTypes.string,
     population: PropTypes.number,
+    // eslint-disable-next-line react/forbid-prop-types
     languages: PropTypes.object,
-    timezones: PropTypes.array,
+    timezones: PropTypes.arrayOf(PropTypes.string),
   }),
+  isFavorite: PropTypes.bool,
+  fnFavoritesOnChange: PropTypes.func,
 };
 
 CardSmall.defaultProps = {
@@ -84,6 +94,8 @@ CardSmall.defaultProps = {
     languages: {},
     timezones: ['time'],
   },
+  isFavorite: false,
+  fnFavoritesOnChange: () => {},
 };
 
 export default CardSmall;

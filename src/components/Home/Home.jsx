@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { useState } from 'react';
 import ALL_COUNTRIES from './all_countries.json';
 import fnSanitize from '../../utils/fnSanitize';
@@ -43,12 +44,18 @@ function Home() {
 
   // checkboxes
   function fnFilterToggle(key, countries) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setStNameValue('');
+    const result = fnFindIntersectionArray(
+      fnGetAllCountriesIfArrayIsEmpty(countries),
+      ...Object.keys(stCountries).filter((objectKey) => objectKey !== 'match' && objectKey !== 'display' && objectKey !== key)
+        .map((objectKey) => fnGetAllCountriesIfArrayIsEmpty(stCountries[objectKey])),
+    );
     setStCountries((prev) => ({
       ...prev,
       [key]: countries,
-      match: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(countries), ...Object.keys(stCountries).filter((objectKey) => objectKey !== 'match' && objectKey !== 'display' && objectKey !== key).map((objectKey) => fnGetAllCountriesIfArrayIsEmpty(stCountries[objectKey]))),
-      display: fnFindIntersectionArray(fnGetAllCountriesIfArrayIsEmpty(countries), ...Object.keys(stCountries).filter((objectKey) => objectKey !== 'match' && objectKey !== 'display' && objectKey !== key).map((objectKey) => fnGetAllCountriesIfArrayIsEmpty(stCountries[objectKey]))),
+      match: result,
+      display: result,
     }));
   }
 
@@ -68,13 +75,24 @@ function Home() {
     };
   }
 
+  // favorites
+  const [stFavorites, setStFavorites] = useState([]);
+
+  function fnFavoritesOnChange(countryActive) {
+    const countryIsFavorite = fnFindUniqueArray([countryActive], stFavorites).length === 0;
+    const result = countryIsFavorite ? stFavorites.filter((countryItem) => fnSanitize(countryItem.name.common) !== fnSanitize(countryActive.name.common))
+      : stFavorites.concat(countryActive);
+    setStFavorites(result);
+  }
+
   // context
   // eslint-disable-next-line react/jsx-no-constructed-context-values
   const countriesContextValue = {
     countries: ALL_COUNTRIES,
-    stSidebar,
-    setStSidebar,
-    stNameValue,
+    favorites: stFavorites,
+    sidebar: stSidebar,
+    fnSidebarToggle: setStSidebar,
+    nameValue: stNameValue,
     fnNameOnChange,
     fnRegionAdd: fnFilterAdd('region'),
     fnRegionRemove: fnFilterRemove('region'),
@@ -102,7 +120,7 @@ function Home() {
             {stCountries.display.length > 0
               ? (
                 <ul className="flex flex-wrap -m-8 mb-8">
-                  {stCountries.display.map((country) => <CardSmall key={country.name.common} country={country} />)}
+                  {stCountries.display.map((country) => <CardSmall key={country.name.common} country={country} isFavorite={stFavorites.includes((country))} fnFavoritesOnChange={fnFavoritesOnChange} />)}
                 </ul>
               )
               : (
