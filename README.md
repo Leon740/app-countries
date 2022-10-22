@@ -9,6 +9,7 @@ Learn React and all of it's concepts.
 # Stack
 
 - React
+- TailwindCSS
 
 # Features
 
