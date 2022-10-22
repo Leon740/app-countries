@@ -4,7 +4,7 @@ React App which provides an option to filter and find countries, add them to the
 
 # Motivation
 
-Learn React and all of it's concepts
+Learn React and all of it's concepts.
 
 # Stack
 
