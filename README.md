@@ -1,3 +1,24 @@
+# Title
+
+React App which provides an option to filter and find countries, add them to the travel list.
+
+# Motivation
+
+Learn React and all of it's concepts
+
+# Stack
+
+- React
+
+# Features
+
+- filter countries
+- find countries
+- add countries to the travel list
+- toggle dark/light mode
+- responsive markup
+- semantic markup
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
