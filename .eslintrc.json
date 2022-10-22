@@ -15,6 +15,7 @@
   "rules": {
     "max-len": "off",
     "no-console": "warn",
+    "func-names": "off",
     "react/jsx-filename-extension": [1, { "allow": "as-needed" }]
   }
 }
